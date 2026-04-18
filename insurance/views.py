@@ -13,8 +13,6 @@ def entry_create(request):
             entry = form.save()
             messages.success(request, f"Entry saved successfully! Policy No: {entry.policy_no}")
             return redirect('insurance:entry_detail', pk=entry.pk)
-        else:
-            messages.error(request, "Please correct the errors below.")
     else:
         form = InsuranceBrokingEntryForm()
 
@@ -71,8 +69,6 @@ def entry_edit(request, pk):
             form.save()
             messages.success(request, "Entry updated successfully.")
             return redirect('insurance:entry_detail', pk=entry.pk)
-        else:
-            messages.error(request, "Please correct the errors below.")
     else:
         form = InsuranceBrokingEntryForm(instance=entry)
 

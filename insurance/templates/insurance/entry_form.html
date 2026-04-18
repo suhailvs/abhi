@@ -3,12 +3,38 @@
 {% block breadcrumb %}Page : Query &rsaquo; Entry Search &rsaquo; {{ action }}{% endblock %}
 
 {% block content %}
+<style>
+  .field-error { font-size: 0.74rem; color: #c00; margin-top: 2px; }
+  .has-error .form-control,
+  .has-error .form-select { border-color: #c00 !important; background: #fff8f8; }
+  .error-summary { background: #fff3f3; border: 1px solid #f5c6cb; border-radius: 3px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.8rem; }
+  .error-summary ul { margin: 4px 0 0 0; padding-left: 18px; }
+  .error-summary li { color: #c00; }
+</style>
+
 <div class="d-flex justify-content-between align-items-center mb-2">
   <h6 class="mb-0 text-dark fw-bold" style="font-family:'Roboto Condensed',sans-serif;letter-spacing:0.5px;">
     {{ title }}
   </h6>
   <a href="{% url 'insurance:entry_list' %}" class="btn btn-secondary btn-sm">← Back</a>
 </div>
+
+<!-- ── ERROR SUMMARY ── -->
+{% if form.errors %}
+<div class="error-summary">
+  <strong>Please fix the following errors before saving:</strong>
+  <ul>
+    {% for field in form %}
+      {% for error in field.errors %}
+        <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+      {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
 
 <form method="post" novalidate>
   {% csrf_token %}
@@ -18,18 +44,20 @@
     <div class="form-section-title">Branch / Company Details</div>
     <div class="p-2">
       <div class="row g-2">
-        <div class="col-md-6">
+        <div class="col-md-6 {% if form.company.errors %}has-error{% endif %}">
           <label class="form-label">Company</label>
           {{ form.company }}
-          {% if form.company.errors %}<div class="text-danger" style="font-size:0.75rem;">{{ form.company.errors.0 }}</div>{% endif %}
+          {% for e in form.company.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 {% if form.branch_city.errors %}has-error{% endif %}">
           <label class="form-label">City</label>
           {{ form.branch_city }}
+          {% for e in form.branch_city.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 {% if form.branch_name.errors %}has-error{% endif %}">
           <label class="form-label">Branch</label>
           {{ form.branch_name }}
+          {% for e in form.branch_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
         </div>
       </div>
     </div>
@@ -42,31 +70,35 @@
         <div class="form-section-title">Ack Details</div>
         <div class="p-2">
           <div class="row g-2">
-            <div class="col-12">
+            <div class="col-12 {% if form.policy_type.errors %}has-error{% endif %}">
               <label class="form-label">Type</label>
               {{ form.policy_type }}
-              {% if form.policy_type.errors %}<div class="text-danger" style="font-size:0.75rem;">{{ form.policy_type.errors.0 }}</div>{% endif %}
+              {% for e in form.policy_type.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-6">
+            <div class="col-6 {% if form.dep_code.errors %}has-error{% endif %}">
               <label class="form-label">Dep. Code</label>
               {{ form.dep_code }}
+              {% for e in form.dep_code.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-6">
+            <div class="col-6 {% if form.ack_date.errors %}has-error{% endif %}">
               <label class="form-label">Ack Date</label>
               {{ form.ack_date }}
+              {% for e in form.ack_date.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-6">
+            <div class="col-6 {% if form.p_date.errors %}has-error{% endif %}">
               <label class="form-label">PDate</label>
               {{ form.p_date }}
+              {% for e in form.p_date.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-6">
+            <div class="col-6 {% if form.login_date.errors %}has-error{% endif %}">
               <label class="form-label">Login Date</label>
               {{ form.login_date }}
+              {% for e in form.login_date.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-8">
+            <div class="col-8 {% if form.ack_no.errors %}has-error{% endif %}">
               <label class="form-label">Ack No.</label>
               {{ form.ack_no }}
-              {% if form.ack_no.errors %}<div class="text-danger" style="font-size:0.75rem;">{{ form.ack_no.errors.0 }}</div>{% endif %}
+              {% for e in form.ack_no.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
             <div class="col-4 d-flex align-items-end pb-1">
               <div class="form-check">
@@ -87,37 +119,45 @@
         <div class="form-section-title">Staff Details</div>
         <div class="p-2">
           <div class="row g-2">
-            <div class="col-4">
+            <div class="col-4 {% if form.staff_code_no.errors %}has-error{% endif %}">
               <label class="form-label">Staff Code</label>
               {{ form.staff_code_no }}
+              {% for e in form.staff_code_no.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-8">
+            <div class="col-8 {% if form.staff_code_name.errors %}has-error{% endif %}">
               <label class="form-label">Name</label>
               {{ form.staff_code_name }}
+              {% for e in form.staff_code_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-4">
+            <div class="col-4 {% if form.branch_mgr_code.errors %}has-error{% endif %}">
               <label class="form-label">Br. Mgr Code</label>
               {{ form.branch_mgr_code }}
+              {% for e in form.branch_mgr_code.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-8">
+            <div class="col-8 {% if form.branch_mgr_name.errors %}has-error{% endif %}">
               <label class="form-label">Branch Manager</label>
               {{ form.branch_mgr_name }}
+              {% for e in form.branch_mgr_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-4">
+            <div class="col-4 {% if form.branch_assist_code.errors %}has-error{% endif %}">
               <label class="form-label">Br. Asst Code</label>
               {{ form.branch_assist_code }}
+              {% for e in form.branch_assist_code.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-8">
+            <div class="col-8 {% if form.branch_assist_name.errors %}has-error{% endif %}">
               <label class="form-label">Branch Assistant</label>
               {{ form.branch_assist_name }}
+              {% for e in form.branch_assist_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-4">
+            <div class="col-4 {% if form.exec_code_no.errors %}has-error{% endif %}">
               <label class="form-label">Exec. Code</label>
               {{ form.exec_code_no }}
+              {% for e in form.exec_code_no.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-8">
+            <div class="col-8 {% if form.exec_code_name.errors %}has-error{% endif %}">
               <label class="form-label">Executive Name</label>
               {{ form.exec_code_name }}
+              {% for e in form.exec_code_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
           </div>
         </div>
@@ -132,45 +172,50 @@
         <div class="form-section-title">Policy Details</div>
         <div class="p-2">
           <div class="row g-2">
-            <div class="col-6">
+            <div class="col-6 {% if form.application_no.errors %}has-error{% endif %}">
               <label class="form-label">Application No</label>
               {{ form.application_no }}
-              {% if form.application_no.errors %}<div class="text-danger" style="font-size:0.75rem;">{{ form.application_no.errors.0 }}</div>{% endif %}
+              {% for e in form.application_no.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-6">
+            <div class="col-6 {% if form.appln_date.errors %}has-error{% endif %}">
               <label class="form-label">Application Date</label>
               {{ form.appln_date }}
+              {% for e in form.appln_date.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-12">
+            <div class="col-12 {% if form.life_assured.errors %}has-error{% endif %}">
               <label class="form-label">Life Assured</label>
               {{ form.life_assured }}
-              {% if form.life_assured.errors %}<div class="text-danger" style="font-size:0.75rem;">{{ form.life_assured.errors.0 }}</div>{% endif %}
+              {% for e in form.life_assured.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-6">
+            <div class="col-6 {% if form.policy_no.errors %}has-error{% endif %}">
               <label class="form-label">Policy No.</label>
               {{ form.policy_no }}
-              {% if form.policy_no.errors %}<div class="text-danger" style="font-size:0.75rem;">{{ form.policy_no.errors.0 }}</div>{% endif %}
+              {% for e in form.policy_no.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-6">
+            <div class="col-6 {% if form.policy_date.errors %}has-error{% endif %}">
               <label class="form-label">Policy Date</label>
               {{ form.policy_date }}
+              {% for e in form.policy_date.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-12">
+            <div class="col-12 {% if form.policy_name.errors %}has-error{% endif %}">
               <label class="form-label">Policy Name</label>
               {{ form.policy_name }}
+              {% for e in form.policy_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-4">
+            <div class="col-4 {% if form.policy_amt.errors %}has-error{% endif %}">
               <label class="form-label">Policy Amount</label>
               {{ form.policy_amt }}
-              {% if form.policy_amt.errors %}<div class="text-danger" style="font-size:0.75rem;">{{ form.policy_amt.errors.0 }}</div>{% endif %}
+              {% for e in form.policy_amt.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-4">
+            <div class="col-4 {% if form.premium_amt.errors %}has-error{% endif %}">
               <label class="form-label">Premium Amount</label>
               {{ form.premium_amt }}
+              {% for e in form.premium_amt.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-4">
+            <div class="col-4 {% if form.payment_term.errors %}has-error{% endif %}">
               <label class="form-label">Payment Term (yrs)</label>
               {{ form.payment_term }}
+              {% for e in form.payment_term.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
           </div>
         </div>
@@ -183,40 +228,45 @@
         <div class="form-section-title">Depositor Details</div>
         <div class="p-2">
           <div class="row g-2">
-            <div class="col-12">
+            <div class="col-12 {% if form.dep_name.errors %}has-error{% endif %}">
               <label class="form-label">Dep. Name</label>
               {{ form.dep_name }}
-              {% if form.dep_name.errors %}<div class="text-danger" style="font-size:0.75rem;">{{ form.dep_name.errors.0 }}</div>{% endif %}
+              {% for e in form.dep_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-12">
+            <div class="col-12 {% if form.address_line1.errors %}has-error{% endif %}">
               <label class="form-label">Address Line 1</label>
               {{ form.address_line1 }}
+              {% for e in form.address_line1.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-12">
+            <div class="col-12 {% if form.address_line2.errors %}has-error{% endif %}">
               <label class="form-label">PO / Village</label>
               {{ form.address_line2 }}
+              {% for e in form.address_line2.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-12">
+            <div class="col-12 {% if form.address_line3.errors %}has-error{% endif %}">
               <label class="form-label">Taluk / Area</label>
               {{ form.address_line3 }}
+              {% for e in form.address_line3.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-8">
+            <div class="col-8 {% if form.city.errors %}has-error{% endif %}">
               <label class="form-label">City / District</label>
               {{ form.city }}
+              {% for e in form.city.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-4">
+            <div class="col-4 {% if form.pin.errors %}has-error{% endif %}">
               <label class="form-label">PIN</label>
               {{ form.pin }}
-              {% if form.pin.errors %}<div class="text-danger" style="font-size:0.75rem;">{{ form.pin.errors.0 }}</div>{% endif %}
+              {% for e in form.pin.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-6">
+            <div class="col-6 {% if form.mobile_number.errors %}has-error{% endif %}">
               <label class="form-label">Mobile Number</label>
               {{ form.mobile_number }}
-              {% if form.mobile_number.errors %}<div class="text-danger" style="font-size:0.75rem;">{{ form.mobile_number.errors.0 }}</div>{% endif %}
+              {% for e in form.mobile_number.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-6">
+            <div class="col-6 {% if form.phone_number.errors %}has-error{% endif %}">
               <label class="form-label">Phone Number</label>
               {{ form.phone_number }}
+              {% for e in form.phone_number.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
           </div>
         </div>
@@ -226,10 +276,15 @@
 
   <!-- Submit -->
   <div class="d-flex gap-2">
-    <button type="submit" class="btn btn-ib-primary px-4">
-      {{ action }} Entry
-    </button>
+    <button type="submit" class="btn btn-ib-primary px-4">{{ action }} Entry</button>
     <a href="{% url 'insurance:entry_list' %}" class="btn btn-outline-secondary">Cancel</a>
   </div>
 </form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const summary = document.querySelector('.error-summary');
+    if (summary) summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
 {% endblock %}
