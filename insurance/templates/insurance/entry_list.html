@@ -1,0 +1,89 @@
+{% extends "insurance/base.html" %}
+{% block title %}Entry Search — Insurance Broking{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-2">
+  <h6 class="mb-0 fw-bold" style="font-family:'Roboto Condensed',sans-serif;">Entry Search</h6>
+  <a href="{% url 'insurance:entry_create' %}" class="btn btn-ib-primary btn-sm">+ New Entry</a>
+</div>
+
+<!-- Search bar -->
+<form method="get" class="mb-3">
+  <div class="input-group" style="max-width:420px;">
+    <input type="text" name="q" value="{{ q }}" class="form-control form-control-sm"
+           placeholder="Search by Policy No, Name, Ack No, Depositor...">
+    <button class="btn btn-ib-primary btn-sm" type="submit">Search</button>
+    {% if q %}<a href="{% url 'insurance:entry_list' %}" class="btn btn-outline-secondary btn-sm">Clear</a>{% endif %}
+  </div>
+</form>
+
+<div class="ib-card">
+  <div class="section-header">
+    Results — {{ page_obj.paginator.count }} entr{{ page_obj.paginator.count|pluralize:"y,ies" }}
+  </div>
+  {% if page_obj.object_list %}
+  <div class="table-responsive">
+    <table class="detail-table" style="font-size:0.8rem;">
+      <thead>
+        <tr style="background:#2c3e6b; color:#fff;">
+          <th class="px-2 py-1">Policy No.</th>
+          <th class="px-2 py-1">Life Assured</th>
+          <th class="px-2 py-1">Ack No.</th>
+          <th class="px-2 py-1">Depositor</th>
+          <th class="px-2 py-1">Policy Amt</th>
+          <th class="px-2 py-1">Ack Date</th>
+          <th class="px-2 py-1">Verified</th>
+          <th class="px-2 py-1">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in page_obj %}
+        <tr>
+          <td><a href="{% url 'insurance:entry_detail' entry.pk %}" style="color:#2c3e6b;font-weight:600;">{{ entry.policy_no }}</a></td>
+          <td>{{ entry.life_assured }}</td>
+          <td>{{ entry.ack_no }}</td>
+          <td>{{ entry.dep_name }}</td>
+          <td>{{ entry.policy_amt }}</td>
+          <td>{{ entry.ack_date|date:"d/m/Y" }}</td>
+          <td>
+            {% if entry.ack_verified %}
+              <span class="badge-verified">✔ Verified</span>
+            {% else %}
+              <span style="color:#aaa; font-size:0.75rem;">—</span>
+            {% endif %}
+          </td>
+          <td>
+            <a href="{% url 'insurance:entry_detail' entry.pk %}" class="btn btn-ib-view btn-sm me-1">View</a>
+            <a href="{% url 'insurance:entry_edit' entry.pk %}" class="btn btn-outline-secondary btn-sm" style="font-size:0.73rem; padding:1px 8px;">Edit</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  {% if page_obj.has_other_pages %}
+  <div class="d-flex justify-content-center py-2">
+    <nav>
+      <ul class="pagination pagination-sm mb-0">
+        {% if page_obj.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}&q={{ q }}">‹</a></li>
+        {% endif %}
+        <li class="page-item disabled"><span class="page-link">{{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span></li>
+        {% if page_obj.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}&q={{ q }}">›</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+  {% endif %}
+
+  {% else %}
+  <div class="p-3 text-center text-muted" style="font-size:0.85rem;">
+    No entries found{% if q %} for "<strong>{{ q }}</strong>"{% endif %}.
+    <a href="{% url 'insurance:entry_create' %}">Create one?</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

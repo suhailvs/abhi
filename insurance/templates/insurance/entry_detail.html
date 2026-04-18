@@ -1,0 +1,148 @@
+{% extends "insurance/base.html" %}
+{% block title %}{{ entry.policy_no }} — Insurance Broking{% endblock %}
+{% block breadcrumb %}Page : Query &rsaquo; Entry Search &rsaquo; Detail{% endblock %}
+
+{% block content %}
+<!-- Company / Branch header -->
+<div class="d-flex justify-content-between align-items-center mb-2 px-1" style="font-size:0.78rem; color:#333;">
+  <span><strong>Company —</strong> {{ entry.company }}</span>
+  <span><strong>City —</strong> {{ entry.branch_city }} &nbsp;&nbsp; <strong>Br —</strong> {{ entry.branch_name }}</span>
+</div>
+
+<div class="ib-card mb-3">
+  <!-- Ack Details / Staff Details split header -->
+  <div class="row g-0">
+    <div class="col-7">
+      <div class="section-header d-flex justify-content-between align-items-center">
+        <span>Ack Details</span>
+        <a href="{% url 'insurance:entry_edit' entry.pk %}" class="btn btn-ib-view btn-sm">View Details</a>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="section-header">Staff Details</div>
+    </div>
+  </div>
+
+  <table class="detail-table">
+    <tr>
+      <td class="label" style="width:12%">Type</td>
+      <td class="value" style="width:38%">{{ entry.get_policy_type_display }}</td>
+      <td class="label" style="width:12%"></td>
+      <td class="value" style="width:38%">{{ entry.staff_code_no }}</td>
+    </tr>
+    <tr>
+      <td class="label">Dep. Code</td>
+      <td class="value">{{ entry.dep_code }}</td>
+      <td class="label">Staff Code</td>
+      <td class="value">{{ entry.staff_code_no }} {{ entry.staff_code_name }}</td>
+    </tr>
+    <tr>
+      <td class="label">Ack Date</td>
+      <td class="value">{{ entry.ack_date|date:"d/m/Y" }}</td>
+      <td class="label">Branch Mgr.</td>
+      <td class="value">{{ entry.branch_mgr_code }} {{ entry.branch_mgr_name }}</td>
+    </tr>
+    <tr>
+      <td class="label">PDate</td>
+      <td class="value">{{ entry.p_date|date:"d/m/Y" }}</td>
+      <td class="label">Branch Assist</td>
+      <td class="value">{{ entry.branch_assist_code }} {{ entry.branch_assist_name }}</td>
+    </tr>
+    <tr>
+      <td class="label">Login Date</td>
+      <td class="value">{{ entry.login_date|date:"d/m/Y" }}</td>
+      <td class="label">Exec. Code</td>
+      <td class="value">{{ entry.exec_code_no }} {{ entry.exec_code_name }}</td>
+    </tr>
+    <tr>
+      <td class="label">Ack No.</td>
+      <td class="value">
+        {{ entry.ack_no }}
+        {% if entry.ack_verified %}
+          <span class="badge-verified ms-2">Ack is Verified</span>
+        {% endif %}
+      </td>
+      <td></td><td></td>
+    </tr>
+  </table>
+</div>
+
+<!-- Policy Details / Depositor Details -->
+<div class="ib-card">
+  <div class="row g-0">
+    <div class="col-7">
+      <div class="section-header">Policy Details</div>
+    </div>
+    <div class="col-5">
+      <div class="section-header">Depositor Details</div>
+    </div>
+  </div>
+
+  <table class="detail-table">
+    <tr>
+      <td class="label" style="width:12%">Application No</td>
+      <td class="value" style="width:38%">{{ entry.application_no }}</td>
+      <td class="label" style="width:12%">Dep. Name</td>
+      <td class="value" style="width:38%">{{ entry.dep_name }}</td>
+    </tr>
+    <tr>
+      <td class="label">Appln Date</td>
+      <td class="value">{{ entry.appln_date|date:"d/m/Y" }}</td>
+      <td class="label">Address</td>
+      <td class="value">{{ entry.address_line1 }}</td>
+    </tr>
+    <tr>
+      <td class="label">Life Assured</td>
+      <td class="value">{{ entry.life_assured }}</td>
+      <td class="label"></td>
+      <td class="value">{{ entry.address_line2 }}</td>
+    </tr>
+    <tr>
+      <td class="label">Policy No.</td>
+      <td class="value">{{ entry.policy_no }}</td>
+      <td class="label"></td>
+      <td class="value">{{ entry.address_line3 }}</td>
+    </tr>
+    <tr>
+      <td class="label">Policy Date</td>
+      <td class="value">{{ entry.policy_date|date:"d/m/Y" }}</td>
+      <td class="label"></td>
+      <td class="value">{{ entry.city }}</td>
+    </tr>
+    <tr>
+      <td class="label">Policy Name</td>
+      <td class="value">{{ entry.policy_name }}</td>
+      <td class="label">Pin</td>
+      <td class="value">{{ entry.pin }}</td>
+    </tr>
+    <tr>
+      <td class="label">Policy Amt.</td>
+      <td class="value">{{ entry.policy_amt }}</td>
+      <td class="label">Mobile Number</td>
+      <td class="value">{{ entry.mobile_number }}</td>
+    </tr>
+    <tr>
+      <td class="label">Premium Amt.</td>
+      <td class="value">{{ entry.premium_amt }}</td>
+      <td class="label">Phone Number</td>
+      <td class="value">{{ entry.phone_number }}</td>
+    </tr>
+    <tr>
+      <td class="label">Payment Term</td>
+      <td class="value">{{ entry.payment_term }}</td>
+      <td></td><td></td>
+    </tr>
+  </table>
+</div>
+
+<!-- Action buttons -->
+<div class="d-flex gap-2 mt-3">
+  <a href="{% url 'insurance:entry_list' %}" class="btn btn-secondary btn-sm">← Back to List</a>
+  <a href="{% url 'insurance:entry_edit' entry.pk %}" class="btn btn-ib-primary btn-sm">Edit Entry</a>
+  <form method="post" action="{% url 'insurance:entry_delete' entry.pk %}" class="ms-auto"
+        onsubmit="return confirm('Delete this entry?')">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+  </form>
+</div>
+{% endblock %}
