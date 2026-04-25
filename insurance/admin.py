@@ -40,6 +40,11 @@ class InsuranceBrokingEntryAdmin(admin.ModelAdmin):
                 'city', 'pin', 'mobile_number', 'phone_number',
             ),
         }),
+        ('Nominee Details', {
+            'fields': (
+                'nominee_name', 'nominee_dob', 'nominee_mobile', 'nominee_email',
+            ),
+        }),
         ('Timestamps', {
             'fields': ('created_at', 'updated_at'),
             'classes': ('collapse',),

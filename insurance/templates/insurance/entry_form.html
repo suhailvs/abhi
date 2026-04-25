@@ -274,6 +274,35 @@
     </div>
   </div>
 
+  <!-- ── NOMINEE DETAILS ── -->
+  <div class="ib-card mb-3">
+    <div class="form-section-title">Nominee Details</div>
+    <div class="p-2">
+      <div class="row g-2">
+        <div class="col-md-4 {% if form.nominee_name.errors %}has-error{% endif %}">
+          <label class="form-label">Nominee Name <span class="text-danger">*</span></label>
+          {{ form.nominee_name }}
+          {% for e in form.nominee_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-3 {% if form.nominee_dob.errors %}has-error{% endif %}">
+          <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
+          {{ form.nominee_dob }}
+          {% for e in form.nominee_dob.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-3 {% if form.nominee_mobile.errors %}has-error{% endif %}">
+          <label class="form-label">Mobile Number <span class="text-danger">*</span></label>
+          {{ form.nominee_mobile }}
+          {% for e in form.nominee_mobile.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-2 {% if form.nominee_email.errors %}has-error{% endif %}">
+          <label class="form-label">Email ID</label>
+          {{ form.nominee_email }}
+          {% for e in form.nominee_email.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Submit -->
   <div class="d-flex gap-2">
     <button type="submit" class="btn btn-ib-primary px-4">{{ action }} Entry</button>

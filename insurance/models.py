@@ -48,6 +48,12 @@ class InsuranceBrokingEntry(models.Model):
     mobile_number = models.CharField(max_length=15, blank=True, verbose_name="Mobile Number")
     phone_number = models.CharField(max_length=15, blank=True, verbose_name="Phone Number")
 
+    # Nominee Details
+    nominee_name = models.CharField(max_length=100, verbose_name="Nominee Name")
+    nominee_dob = models.DateField(verbose_name="Nominee Date of Birth")
+    nominee_email = models.EmailField(max_length=200, blank=True, verbose_name="Nominee Email ID")
+    nominee_mobile = models.CharField(max_length=15, verbose_name="Nominee Mobile Number")
+
     # Meta
     company = models.CharField(max_length=200, default="ICICI PRUDENTIAL LIFE INSURANCE COMPANY LIMITED")
     branch_city = models.CharField(max_length=100, default="KODUNGALLUR", verbose_name="City")

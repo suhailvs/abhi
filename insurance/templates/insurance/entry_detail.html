@@ -135,6 +135,25 @@
   </table>
 </div>
 
+<!-- Nominee Details -->
+<div class="ib-card mt-3">
+  <div class="section-header">Nominee Details</div>
+  <table class="detail-table">
+    <tr>
+      <td class="label" style="width:16%">Nominee Name</td>
+      <td class="value" style="width:34%">{{ entry.nominee_name }}</td>
+      <td class="label" style="width:16%">Date of Birth</td>
+      <td class="value" style="width:34%">{{ entry.nominee_dob|date:"d/m/Y" }}</td>
+    </tr>
+    <tr>
+      <td class="label">Mobile Number</td>
+      <td class="value">{{ entry.nominee_mobile }}</td>
+      <td class="label">Email ID</td>
+      <td class="value">{{ entry.nominee_email|default:"—" }}</td>
+    </tr>
+  </table>
+</div>
+
 <!-- Action buttons -->
 <div class="d-flex gap-2 mt-3">
   <a href="{% url 'insurance:entry_list' %}" class="btn btn-secondary btn-sm">← Back to List</a>

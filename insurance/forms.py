@@ -48,6 +48,12 @@ class InsuranceBrokingEntryForm(forms.ModelForm):
             'mobile_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile No.'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone No.'}),
 
+            # Nominee Details
+            'nominee_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nominee Full Name'}),
+            'nominee_dob': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'nominee_email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'nominee@email.com'}),
+            'nominee_mobile': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile No.'}),
+
             # Meta / Branch
             'company': forms.TextInput(attrs={'class': 'form-control'}),
             'branch_city': forms.TextInput(attrs={'class': 'form-control'}),
@@ -62,6 +68,12 @@ class InsuranceBrokingEntryForm(forms.ModelForm):
 
     def clean_mobile_number(self):
         mob = self.cleaned_data.get('mobile_number', '')
+        if mob and (not mob.isdigit() or len(mob) < 10):
+            raise forms.ValidationError("Enter a valid mobile number (min 10 digits).")
+        return mob
+
+    def clean_nominee_mobile(self):
+        mob = self.cleaned_data.get('nominee_mobile', '')
         if mob and (not mob.isdigit() or len(mob) < 10):
             raise forms.ValidationError("Enter a valid mobile number (min 10 digits).")
         return mob
