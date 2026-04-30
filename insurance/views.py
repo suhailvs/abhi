@@ -1,10 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 from .models import InsuranceBrokingEntry
 from .forms import InsuranceBrokingEntryForm
 
-
+@login_required
+def home(request):
+    return render(request, 'home.html')
+@login_required
 def entry_create(request):
     """Create a new insurance broking entry."""
     if request.method == 'POST':
@@ -22,7 +26,7 @@ def entry_create(request):
         'action': 'Create',
     })
 
-
+@login_required
 def entry_detail(request, pk):
     """Display full details of a single entry (mirrors the screen layout)."""
     entry = get_object_or_404(InsuranceBrokingEntry, pk=pk)
@@ -31,7 +35,7 @@ def entry_detail(request, pk):
         'title': f'Policy: {entry.policy_no}',
     })
 
-
+@login_required
 def entry_list(request):
     """List all entries with search/filter."""
     qs = InsuranceBrokingEntry.objects.all()
@@ -59,7 +63,7 @@ def entry_list(request):
         'title': 'Insurance Broking — Entry Search',
     })
 
-
+@login_required
 def entry_edit(request, pk):
     """Edit an existing entry."""
     entry = get_object_or_404(InsuranceBrokingEntry, pk=pk)
@@ -79,7 +83,7 @@ def entry_edit(request, pk):
         'action': 'Update',
     })
 
-
+@login_required
 def entry_delete(request, pk):
     """Delete an entry (POST only)."""
     entry = get_object_or_404(InsuranceBrokingEntry, pk=pk)

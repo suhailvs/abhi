@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-
+from insurance.views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('insurance.urls', namespace='insurance')),
+    path('home/',home, name="home"),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
