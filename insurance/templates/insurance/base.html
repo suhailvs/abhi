@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
+{% block nav %}INSURANCE BROKING{% endblock %}
 {% block body %}
-
-<div class="topbar">
-  <span class="app-title">≡ 🏠 INSURANCE BROKING</span>
-  <span class="breadcrumb-bar">{% block breadcrumb %}Page : Query &rsaquo; Entry Search{% endblock %}</span>
-</div>
-
 <div class="container-fluid px-3 py-3">
   {% if messages %}
     {% for message in messages %}
