@@ -7,6 +7,8 @@ from .forms import InsuranceBrokingEntryForm
 
 @login_required
 def home(request):
+    if request.user.is_staff:
+        return redirect('admin:index')
     return render(request, 'home.html')
 @login_required
 def entry_create(request):
