@@ -1,7 +1,14 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from .models import InsuranceBrokingEntry
+from .models import User
+extrafields = ('image','phone')
+class CustomUserAdmin(UserAdmin):
+    fieldsets = UserAdmin.fieldsets + (('Other fields',{'fields':extrafields}),)
+    list_display = UserAdmin.list_display + extrafields 
+    list_filter = ("is_active")
 
-
+admin.site.register(User, CustomUserAdmin)
 @admin.register(InsuranceBrokingEntry)
 class InsuranceBrokingEntryAdmin(admin.ModelAdmin):
     list_display = [
