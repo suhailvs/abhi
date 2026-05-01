@@ -6,7 +6,7 @@ extrafields = ('image','phone')
 class CustomUserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (('Other fields',{'fields':extrafields}),)
     list_display = UserAdmin.list_display + extrafields 
-    list_filter = ("is_active")
+    list_filter = ("is_active",)
 
 admin.site.register(User, CustomUserAdmin)
 @admin.register(InsuranceBrokingEntry)
