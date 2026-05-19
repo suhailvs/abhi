@@ -30,12 +30,9 @@ class InsuranceBrokingEntry(models.Model):
     branch_mgr_name = models.CharField(max_length=100, verbose_name="Branch Manager")
     branch_assist_code = models.CharField(max_length=10, verbose_name="Branch Assist Code", blank=True)
     branch_assist_name = models.CharField(max_length=100, verbose_name="Branch Assistant")
-    exec_code_no = models.CharField(max_length=10, verbose_name="Exec. Code No", blank=True)
-    exec_code_name = models.CharField(max_length=100, verbose_name="Executive Name")
 
     # Policy Details
     application_no = models.CharField(max_length=30, verbose_name="Application No")
-    appln_date = models.DateField(verbose_name="Application Date")
     life_assured = models.CharField(max_length=100, verbose_name="Life Assured")
     policy_no = models.CharField(max_length=30, unique=True, verbose_name="Policy No.")
     policy_date = models.DateField(verbose_name="Policy Date")

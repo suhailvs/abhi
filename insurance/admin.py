@@ -31,12 +31,11 @@ class InsuranceBrokingEntryAdmin(admin.ModelAdmin):
                 ('staff_code_no', 'staff_code_name'),
                 ('branch_mgr_code', 'branch_mgr_name'),
                 ('branch_assist_code', 'branch_assist_name'),
-                ('exec_code_no', 'exec_code_name'),
             ),
         }),
         ('Policy Details', {
             'fields': (
-                'application_no', 'appln_date', 'life_assured',
+                'application_no', 'life_assured',
                 'policy_no', 'policy_date', 'policy_name',
                 'policy_amt', 'premium_amt', 'payment_term',
             ),

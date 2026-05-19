@@ -51,8 +51,6 @@
     <tr>
       <td class="label">Login Date</td>
       <td class="value">{{ entry.login_date|date:"d/m/Y" }}</td>
-      <td class="label">Exec. Code</td>
-      <td class="value">{{ entry.exec_code_no }} {{ entry.exec_code_name }}</td>
     </tr>
     <tr>
       <td class="label">Ack No.</td>
@@ -87,7 +85,7 @@
     </tr>
     <tr>
       <td class="label">Appln Date</td>
-      <td class="value">{{ entry.appln_date|date:"d/m/Y" }}</td>
+      <td class="value">{{ entry.created_at|date:"d/m/Y" }}</td>
       <td class="label">Address</td>
       <td class="value">{{ entry.address_line1 }}</td>
     </tr>

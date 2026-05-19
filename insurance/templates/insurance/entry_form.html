@@ -149,16 +149,6 @@
               {{ form.branch_assist_name }}
               {% for e in form.branch_assist_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-4 {% if form.exec_code_no.errors %}has-error{% endif %}">
-              <label class="form-label">Exec. Code</label>
-              {{ form.exec_code_no }}
-              {% for e in form.exec_code_no.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
-            </div>
-            <div class="col-8 {% if form.exec_code_name.errors %}has-error{% endif %}">
-              <label class="form-label">Executive Name</label>
-              {{ form.exec_code_name }}
-              {% for e in form.exec_code_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
-            </div>
           </div>
         </div>
       </div>
@@ -176,11 +166,6 @@
               <label class="form-label">Application No</label>
               {{ form.application_no }}
               {% for e in form.application_no.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
-            </div>
-            <div class="col-6 {% if form.appln_date.errors %}has-error{% endif %}">
-              <label class="form-label">Application Date</label>
-              {{ form.appln_date }}
-              {% for e in form.appln_date.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
             <div class="col-12 {% if form.life_assured.errors %}has-error{% endif %}">
               <label class="form-label">Life Assured</label>

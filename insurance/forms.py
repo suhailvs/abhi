@@ -24,12 +24,9 @@ class InsuranceBrokingEntryForm(forms.ModelForm):
             'branch_mgr_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Manager Name'}),
             'branch_assist_code': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Code'}),
             'branch_assist_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Assistant Name'}),
-            'exec_code_no': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Code'}),
-            'exec_code_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Executive Name'}),
 
             # Policy Details
             'application_no': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g. OS19084570'}),
-            'appln_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'life_assured': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Full Name'}),
             'policy_no': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g. C5781696'}),
             'policy_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),

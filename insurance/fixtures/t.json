@@ -1,0 +1,22 @@
+[
+{
+    "model": "insurance.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$DxYz7mWdu4jBHFnbABGWkq$48lwp1NK5NcmFYQsPHUBi+WZShzPhmtmr/QuNfk5dyA=",
+        "last_login": "2026-05-07T04:21:22.690Z",
+        "is_superuser": false,
+        "username": "a",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-07T04:21:14.762Z",
+        "phone": "",
+        "image": "",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
