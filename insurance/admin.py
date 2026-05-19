@@ -28,9 +28,9 @@ class InsuranceBrokingEntryAdmin(admin.ModelAdmin):
         }),
         ('Staff Details', {
             'fields': (
-                ('staff_code_no', 'staff_code_name'),
-                ('branch_mgr_code', 'branch_mgr_name'),
-                ('branch_assist_code', 'branch_assist_name'),
+                'staff',
+                'branch_mgr',
+                'branch_assist',
             ),
         }),
         ('Policy Details', {

@@ -4,6 +4,24 @@ from .models import InsuranceBrokingEntry
 
 class InsuranceBrokingEntryForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        user_queryset = self.fields['staff'].queryset.order_by('first_name', 'last_name', 'username')
+        for field_name in ['staff', 'branch_mgr', 'branch_assist']:
+            self.fields[field_name].queryset = user_queryset
+            self.fields[field_name].empty_label = 'Select user'
+            self.fields[field_name].label_from_instance = self.user_label_from_instance
+
+    @staticmethod
+    def user_label_from_instance(user):
+        name_parts = [part for part in [user.first_name, user.last_name] if part]
+        full_name = " ".join(name_parts)
+        if full_name and user.username:
+            return f"{full_name} ({user.username})"
+        if user.first_name and user.username:
+            return f"{user.first_name} ({user.username})"
+        return full_name or user.username
+
     class Meta:
         model = InsuranceBrokingEntry
         exclude = ['created_at', 'updated_at']
@@ -18,12 +36,9 @@ class InsuranceBrokingEntryForm(forms.ModelForm):
             'ack_verified': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
 
             # Staff Details
-            'staff_code_no': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Code'}),
-            'staff_code_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Staff Name'}),
-            'branch_mgr_code': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Code'}),
-            'branch_mgr_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Manager Name'}),
-            'branch_assist_code': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Code'}),
-            'branch_assist_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Assistant Name'}),
+            'staff': forms.Select(attrs={'class': 'form-select'}),
+            'branch_mgr': forms.Select(attrs={'class': 'form-select'}),
+            'branch_assist': forms.Select(attrs={'class': 'form-select'}),
 
             # Policy Details
             'application_no': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g. OS19084570'}),

@@ -119,35 +119,20 @@
         <div class="form-section-title">Staff Details</div>
         <div class="p-2">
           <div class="row g-2">
-            <div class="col-4 {% if form.staff_code_no.errors %}has-error{% endif %}">
-              <label class="form-label">Staff Code</label>
-              {{ form.staff_code_no }}
-              {% for e in form.staff_code_no.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+            <div class="col-12 {% if form.staff.errors %}has-error{% endif %}">
+              <label class="form-label">Staff</label>
+              {{ form.staff }}
+              {% for e in form.staff.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-8 {% if form.staff_code_name.errors %}has-error{% endif %}">
-              <label class="form-label">Name</label>
-              {{ form.staff_code_name }}
-              {% for e in form.staff_code_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
-            </div>
-            <div class="col-4 {% if form.branch_mgr_code.errors %}has-error{% endif %}">
-              <label class="form-label">Br. Mgr Code</label>
-              {{ form.branch_mgr_code }}
-              {% for e in form.branch_mgr_code.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
-            </div>
-            <div class="col-8 {% if form.branch_mgr_name.errors %}has-error{% endif %}">
+            <div class="col-12 {% if form.branch_mgr.errors %}has-error{% endif %}">
               <label class="form-label">Branch Manager</label>
-              {{ form.branch_mgr_name }}
-              {% for e in form.branch_mgr_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+              {{ form.branch_mgr }}
+              {% for e in form.branch_mgr.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
-            <div class="col-4 {% if form.branch_assist_code.errors %}has-error{% endif %}">
-              <label class="form-label">Br. Asst Code</label>
-              {{ form.branch_assist_code }}
-              {% for e in form.branch_assist_code.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
-            </div>
-            <div class="col-8 {% if form.branch_assist_name.errors %}has-error{% endif %}">
+            <div class="col-12 {% if form.branch_assist.errors %}has-error{% endif %}">
               <label class="form-label">Branch Assistant</label>
-              {{ form.branch_assist_name }}
-              {% for e in form.branch_assist_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+              {{ form.branch_assist }}
+              {% for e in form.branch_assist.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
           </div>
         </div>

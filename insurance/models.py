@@ -6,6 +6,9 @@ class User(AbstractUser):
     phone = models.CharField(max_length=50, blank=False)
     image = models.ImageField(upload_to='users/')
 
+    def __str__(self):
+        return self.get_full_name() or self.username
+
 
 class InsuranceBrokingEntry(models.Model):
     POLICY_TYPE_CHOICES = [
@@ -24,12 +27,30 @@ class InsuranceBrokingEntry(models.Model):
     ack_verified = models.BooleanField(default=False, verbose_name="Ack is Verified")
 
     # Staff Details
-    staff_code_no = models.CharField(max_length=10, verbose_name="Staff Code No", blank=True)
-    staff_code_name = models.CharField(max_length=100, verbose_name="Staff Name")
-    branch_mgr_code = models.CharField(max_length=10, verbose_name="Branch Mgr Code", blank=True)
-    branch_mgr_name = models.CharField(max_length=100, verbose_name="Branch Manager")
-    branch_assist_code = models.CharField(max_length=10, verbose_name="Branch Assist Code", blank=True)
-    branch_assist_name = models.CharField(max_length=100, verbose_name="Branch Assistant")
+    staff = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='staff_entries',
+        verbose_name="Staff",
+    )
+    branch_mgr = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='managed_branch_entries',
+        verbose_name="Branch Manager",
+    )
+    branch_assist = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='assisted_branch_entries',
+        verbose_name="Branch Assistant",
+    )
 
     # Policy Details
     application_no = models.CharField(max_length=30, verbose_name="Application No")
@@ -72,3 +93,15 @@ class InsuranceBrokingEntry(models.Model):
 
     def __str__(self):
         return f"{self.policy_no} - {self.life_assured}"
+
+    @property
+    def staff_display(self):
+        return str(self.staff) if self.staff else ""
+
+    @property
+    def branch_mgr_display(self):
+        return str(self.branch_mgr) if self.branch_mgr else ""
+
+    @property
+    def branch_assist_display(self):
+        return str(self.branch_assist) if self.branch_assist else ""

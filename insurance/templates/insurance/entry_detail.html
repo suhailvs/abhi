@@ -15,7 +15,6 @@
     <div class="col-7">
       <div class="section-header d-flex justify-content-between align-items-center">
         <span>Ack Details</span>
-        <a href="{% url 'insurance:entry_edit' entry.pk %}" class="btn btn-ib-view btn-sm">View Details</a>
       </div>
     </div>
     <div class="col-5">
@@ -28,25 +27,25 @@
       <td class="label" style="width:12%">Type</td>
       <td class="value" style="width:38%">{{ entry.get_policy_type_display }}</td>
       <td class="label" style="width:12%"></td>
-      <td class="value" style="width:38%">{{ entry.staff_code_no }}</td>
+      <td class="value" style="width:38%"></td>
     </tr>
     <tr>
       <td class="label">Dep. Code</td>
       <td class="value">{{ entry.dep_code }}</td>
-      <td class="label">Staff Code</td>
-      <td class="value">{{ entry.staff_code_no }} {{ entry.staff_code_name }}</td>
+      <td class="label">Staff</td>
+      <td class="value">{{ entry.staff_display|default:"—" }}</td>
     </tr>
     <tr>
       <td class="label">Ack Date</td>
       <td class="value">{{ entry.ack_date|date:"d/m/Y" }}</td>
       <td class="label">Branch Mgr.</td>
-      <td class="value">{{ entry.branch_mgr_code }} {{ entry.branch_mgr_name }}</td>
+      <td class="value">{{ entry.branch_mgr_display|default:"—" }}</td>
     </tr>
     <tr>
       <td class="label">PDate</td>
       <td class="value">{{ entry.p_date|date:"d/m/Y" }}</td>
       <td class="label">Branch Assist</td>
-      <td class="value">{{ entry.branch_assist_code }} {{ entry.branch_assist_name }}</td>
+      <td class="value">{{ entry.branch_assist_display|default:"—" }}</td>
     </tr>
     <tr>
       <td class="label">Login Date</td>
