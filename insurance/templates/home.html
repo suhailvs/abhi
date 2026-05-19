@@ -1,6 +1,74 @@
 {% extends 'base.html' %}
 {% block nav %}HOME{% endblock %}
 {% block content %}
-<a href="{% url 'insurance:entry_list' %}" class="btn btn-primary btn-lg">Insurance</a>
-{% endblock %}
+<style>
+  .home-shell {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 760px;
+  }
+  .user-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #f7fbff, #eef4ff);
+    border: 1px solid #d9e4f2;
+    box-shadow: 0 10px 24px rgba(41, 72, 126, 0.08);
+  }
+  .user-photo {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 6px 18px rgba(41, 72, 126, 0.14);
+    background: #d7e2f0;
+  }
+  .user-meta h5 {
+    margin: 0 0 0.35rem;
+    font-weight: 700;
+    color: #183153;
+  }
+  .user-meta p {
+    margin: 0.18rem 0;
+    color: #49617f;
+    font-size: 0.96rem;
+  }
+  .user-meta strong {
+    color: #183153;
+  }
+  .quick-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 1.2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+</style>
 
+<div class="home-shell">
+  <div class="user-card">
+    {% if request.user.image %}
+      <img src="{{ request.user.image.url }}" alt="{{ request.user.first_name|default:request.user.username }}" class="user-photo">
+    {% else %}
+      <div class="user-photo d-flex align-items-center justify-content-center text-white fw-bold">
+        {{ request.user.first_name|default:request.user.username|slice:":1"|upper }}
+      </div>
+    {% endif %}
+
+    <div class="user-meta">
+      <h5>{{ request.user.first_name|default:request.user.username }}</h5>
+      <p><strong>Phone:</strong> {{ request.user.phone|default:"—" }}</p>
+      <p><strong>Username:</strong> {{ request.user.username }}</p>
+    </div>
+  </div>
+
+  <div>
+    <a href="{% url 'insurance:entry_list' %}" class="btn btn-primary btn-lg quick-link">Insurance</a>
+  </div>
+</div>
+{% endblock %}

@@ -3,18 +3,78 @@
     "model": "insurance.user",
     "pk": 1,
     "fields": {
-        "password": "pbkdf2_sha256$1200000$DxYz7mWdu4jBHFnbABGWkq$48lwp1NK5NcmFYQsPHUBi+WZShzPhmtmr/QuNfk5dyA=",
+        "password": "pbkdf2_sha256$1200000$22K8QcJmNuCsgP2O3pDwSZ$YTAhhqpSAA5fvfzasrk47Hx7k2oNsbC0BDoJDGT4izs=",
         "last_login": "2026-05-07T04:21:22.690Z",
-        "is_superuser": false,
+        "is_superuser": true,
         "username": "a",
         "first_name": "",
         "last_name": "",
         "email": "",
-        "is_staff": false,
+        "is_staff": true,
         "is_active": true,
         "date_joined": "2026-05-07T04:21:14.762Z",
         "phone": "",
         "image": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "insurance.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$XH0tJTNijZbO58c5s9RewY$hKIbnbVMsTncpvRHI6+Chc89zUAY6gfO6QFhHKeKT+8=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "1000",
+        "first_name": "Suhail VS",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-19T10:54:49Z",
+        "phone": "7356775981",
+        "image": "users/me_chatgpt.jpg",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "insurance.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$3EemK5v99CjaPMD0Ex8Cpi$624HPoJ0YNi3SkTaS3GZTgqBGXQDktp9Tg3Er+2wOIM=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "1001",
+        "first_name": "Sufail VS",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-19T10:57:46Z",
+        "phone": "6238287359",
+        "image": "users/sufail.jpeg",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "insurance.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$seLj9HHGAxaYK1BPbJy8jP$hhwQHe0KyixcAUaquOUB4Pr8GlaLzs4OTwRe3ohBsuE=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "1003",
+        "first_name": "Inu",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-05-19T10:59:06Z",
+        "phone": "7561000863",
+        "image": "users/inu.jpg",
         "groups": [],
         "user_permissions": []
     }

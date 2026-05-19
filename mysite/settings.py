@@ -117,6 +117,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'mysite' / 'staticfiles'
+MEDIA_ROOT = BASE_DIR / "mysite" / "media" # os.path.join(BASE_DIR, 'media')
+
 AUTH_USER_MODEL = 'insurance.User'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
