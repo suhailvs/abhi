@@ -151,6 +151,30 @@
   </table>
 </div>
 
+<div class="ib-card mt-3">
+  <div class="section-header">Payment Details</div>
+  <table class="detail-table">
+    <tr>
+      <td class="label" style="width:16%">Bank</td>
+      <td class="value" style="width:34%">{{ entry.bank|default:"—" }}</td>
+      <td class="label" style="width:16%">Branch</td>
+      <td class="value" style="width:34%">{{ entry.bank_branch|default:"—" }}</td>
+    </tr>
+    <tr>
+      <td class="label">MICR Code</td>
+      <td class="value">{{ entry.micr_code|default:"—" }}</td>
+      <td class="label">IFSC Code</td>
+      <td class="value">{{ entry.ifsc_code|default:"—" }}</td>
+    </tr>
+    <tr>
+      <td class="label">Check Number</td>
+      <td class="value">{{ entry.check_number|default:"—" }}</td>
+      <td class="label">Check Amount</td>
+      <td class="value">{{ entry.check_amount|default:"—" }}</td>
+    </tr>
+  </table>
+</div>
+
 <!-- Action buttons -->
 <div class="d-flex gap-2 mt-3">
   <a href="{% url 'insurance:entry_list' %}" class="btn btn-secondary btn-sm">← Back to List</a>

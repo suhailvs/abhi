@@ -72,6 +72,20 @@ class InsuranceBrokingEntry(models.Model):
     mobile_number = models.CharField(max_length=15, blank=True, verbose_name="Mobile Number")
     phone_number = models.CharField(max_length=15, blank=True, verbose_name="Phone Number")
 
+    # Payment Details
+    bank = models.CharField(max_length=100, blank=True, verbose_name="Bank")
+    bank_branch = models.CharField(max_length=100, blank=True, verbose_name="Branch")
+    micr_code = models.CharField(max_length=20, blank=True, verbose_name="MICR Code")
+    ifsc_code = models.CharField(max_length=20, blank=True, verbose_name="IFSC Code")
+    check_number = models.CharField(max_length=50, blank=True, verbose_name="Check Number")
+    check_amount = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        verbose_name="Check Amount",
+    )
+
     # Nominee Details
     nominee_name = models.CharField(max_length=100, verbose_name="Nominee Name")
     nominee_dob = models.DateField(verbose_name="Nominee Date of Birth")

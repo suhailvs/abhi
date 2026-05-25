@@ -60,6 +60,14 @@ class InsuranceBrokingEntryForm(forms.ModelForm):
             'mobile_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile No.'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone No.'}),
 
+            # Payment Details
+            'bank': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Bank name'}),
+            'bank_branch': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Branch name'}),
+            'micr_code': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'MICR code'}),
+            'ifsc_code': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'IFSC code'}),
+            'check_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Cheque / check number'}),
+            'check_amount': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '0.00'}),
+
             # Nominee Details
             'nominee_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nominee Full Name'}),
             'nominee_dob': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),

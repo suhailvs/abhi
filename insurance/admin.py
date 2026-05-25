@@ -46,6 +46,12 @@ class InsuranceBrokingEntryAdmin(admin.ModelAdmin):
                 'city', 'pin', 'mobile_number', 'phone_number',
             ),
         }),
+        ('Payment Details', {
+            'fields': (
+                'bank', 'bank_branch', 'micr_code',
+                'ifsc_code', 'check_number', 'check_amount',
+            ),
+        }),
         ('Nominee Details', {
             'fields': (
                 'nominee_name', 'nominee_dob', 'nominee_mobile', 'nominee_email',

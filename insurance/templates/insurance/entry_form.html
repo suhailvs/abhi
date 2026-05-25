@@ -273,6 +273,44 @@
     </div>
   </div>
 
+  <div class="ib-card mb-3">
+    <div class="form-section-title">Payment Details</div>
+    <div class="p-2">
+      <div class="row g-2">
+        <div class="col-md-4 {% if form.bank.errors %}has-error{% endif %}">
+          <label class="form-label">Bank</label>
+          {{ form.bank }}
+          {% for e in form.bank.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-4 {% if form.bank_branch.errors %}has-error{% endif %}">
+          <label class="form-label">Branch</label>
+          {{ form.bank_branch }}
+          {% for e in form.bank_branch.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-4 {% if form.micr_code.errors %}has-error{% endif %}">
+          <label class="form-label">MICR Code</label>
+          {{ form.micr_code }}
+          {% for e in form.micr_code.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-4 {% if form.ifsc_code.errors %}has-error{% endif %}">
+          <label class="form-label">IFSC Code</label>
+          {{ form.ifsc_code }}
+          {% for e in form.ifsc_code.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-4 {% if form.check_number.errors %}has-error{% endif %}">
+          <label class="form-label">Check Number</label>
+          {{ form.check_number }}
+          {% for e in form.check_number.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-4 {% if form.check_amount.errors %}has-error{% endif %}">
+          <label class="form-label">Check Amount</label>
+          {{ form.check_amount }}
+          {% for e in form.check_amount.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Submit -->
   <div class="d-flex gap-2">
     <button type="submit" class="btn btn-ib-primary px-4">{{ action }} Entry</button>

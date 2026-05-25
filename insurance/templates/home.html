@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block nav %}HOME{% endblock %}
 {% block content %}
 <style>
@@ -48,27 +49,143 @@
     font-size: 1rem;
     font-weight: 600;
   }
+
+
+
+  /* big service buttons */
+    .service-card {
+      border-radius: 18px;
+      padding: 2.8rem 2rem 2.4rem;
+      position: relative; overflow: hidden;
+      cursor: pointer; text-decoration: none;
+      display: block;
+      transition: transform .25s, box-shadow .25s;
+      border: none;
+    }
+    .service-card:hover { transform: translateY(-6px); text-decoration: none; }
+
+    .service-card .sc-icon {
+      width: 64px; height: 64px;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.4rem; font-size: 1.7rem;
+    }
+    .service-card .sc-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; font-weight: 700; margin-bottom: .5rem;
+      line-height: 1.2;
+    }
+    .service-card .sc-desc {
+      font-size: .85rem; line-height: 1.6; opacity: .75; margin-bottom: 1.6rem;
+    }
+    .service-card .sc-cta {
+      font-size: .82rem; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; display: flex; align-items: center; gap: .4rem;
+    }
+    .sc-arrow {
+      width: 22px; height: 22px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: .75rem;
+      transition: transform .2s;
+    }
+    .service-card:hover .sc-arrow { transform: translateX(4px); }
+    .service-card::after {
+      content: '';
+      position: absolute; bottom: -40px; right: -40px;
+      width: 120px; height: 120px; border-radius: 50%;
+      opacity: .08;
+    }
+
+    /* card colour themes */
+    .sc-navy {
+      background: linear-gradient(145deg, var(--navy) 0%, #1a6fa8 100%);
+      color: #fff;
+      box-shadow: 0 12px 40px rgba(27,94,140,.22);
+    }
+    .sc-navy:hover { box-shadow: 0 20px 50px rgba(27,94,140,.35); color: #fff; }
+    .sc-navy .sc-icon { background: rgba(255,255,255,.15); color: #fff; }
+    .sc-navy .sc-cta { color: #a8d8f8; }
+    .sc-navy .sc-arrow { background: rgba(255,255,255,.15); color: #fff; }
+    .sc-navy::after { background: #fff; }
+
+    .sc-red {
+      background: linear-gradient(145deg, var(--red) 0%, #f05870 100%);
+      color: #fff;
+      box-shadow: 0 12px 40px rgba(232,69,90,.22);
+    }
+    .sc-red:hover { box-shadow: 0 20px 50px rgba(232,69,90,.35); color: #fff; }
+    .sc-red .sc-icon { background: rgba(255,255,255,.18); color: #fff; }
+    .sc-red .sc-cta { color: #ffc7cf; }
+    .sc-red .sc-arrow { background: rgba(255,255,255,.18); color: #fff; }
+    .sc-red::after { background: #fff; }
+
+    .sc-light-navy {
+      background: linear-gradient(145deg, #eef5fb 0%, #daeaf7 100%);
+      color: var(--navy);
+      box-shadow: 0 12px 40px rgba(27,94,140,.1);
+      border: 1px solid rgba(27,94,140,.1);
+    }
+    .sc-light-navy:hover { box-shadow: 0 20px 50px rgba(27,94,140,.18); color: var(--navy); }
+    .sc-light-navy .sc-icon { background: rgba(27,94,140,.12); color: var(--navy); }
+    .sc-light-navy .sc-cta { color: var(--navy); }
+    .sc-light-navy .sc-arrow { background: var(--navy); color: #fff; }
+    .sc-light-navy::after { background: var(--navy); }
+
+    .sc-light-red {
+      background: linear-gradient(145deg, #fff5f6 0%, #fde6e9 100%);
+      color: #a82035;
+      box-shadow: 0 12px 40px rgba(232,69,90,.1);
+      border: 1px solid rgba(232,69,90,.1);
+    }
+    .sc-light-red:hover { box-shadow: 0 20px 50px rgba(232,69,90,.2); color: #a82035; }
+    .sc-light-red .sc-icon { background: rgba(232,69,90,.12); color: var(--red); }
+    .sc-light-red .sc-cta { color: var(--red); }
+    .sc-light-red .sc-arrow { background: var(--red); color: #fff; }
+    .sc-light-red::after { background: var(--red); }
 </style>
 
 <div class="home-shell">
   <div class="user-card">
-    {% if request.user.image %}
-      <img src="{{ request.user.image.url }}" alt="{{ request.user.first_name|default:request.user.username }}" class="user-photo">
-    {% else %}
-      <div class="user-photo d-flex align-items-center justify-content-center text-white fw-bold">
-        {{ request.user.first_name|default:request.user.username|slice:":1"|upper }}
+    <img src='{% static "logo.jpeg" %}'>
+  </div>
+  <section class="services" id="services">
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Mutual Fund -->
+        <div class="col-md-3 col-xl-3">
+          <a href="{% url 'insurance:entry_list' %}" class="service-card sc-light-navy h-100">
+            <div class="sc-icon">📈</div>
+            <div class="sc-title">Mutual<br/>Fund</div>
+          </a>
+        </div>
+
+        <!-- General Insurance -->
+        <div class="col-md-3 col-xl-3">
+          <a href="{% url 'insurance:entry_list' %}" class="service-card sc-light-navy h-100">
+            <div class="sc-icon">🏠</div>
+            <div class="sc-title">General<br/>Insurance</div>
+          </a>
+        </div>
+
+        <!-- Health Insurance -->
+        <div class="col-md-3 col-xl-3">
+          <a href="{% url 'insurance:entry_list' %}" class="service-card sc-light-navy h-100">
+            <div class="sc-icon">🏥</div>
+            <div class="sc-title">Health<br/>Insurance</div>
+          </a>
+        </div>
+
+        <!-- Life Insurance -->
+        <div class="col-md-3 col-xl-3">
+          <a href="{% url 'insurance:entry_list' %}" class="service-card sc-light-navy h-100">
+            <div class="sc-icon">❤️</div>
+            <div class="sc-title">Life<br/>Insurance</div>
+          </a>
+        </div>
+
       </div>
-    {% endif %}
-
-    <div class="user-meta">
-      <h5>{{ request.user.first_name|default:request.user.username }}</h5>
-      <p><strong>Phone:</strong> {{ request.user.phone|default:"—" }}</p>
-      <p><strong>Username:</strong> {{ request.user.username }}</p>
     </div>
-  </div>
-
-  <div>
-    <a href="{% url 'insurance:entry_list' %}" class="btn btn-primary btn-lg quick-link">Insurance</a>
-  </div>
+  </section>
 </div>
 {% endblock %}
