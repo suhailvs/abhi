@@ -113,16 +113,21 @@
       <td class="value">{{ entry.pin }}</td>
     </tr>
     <tr>
-      <td class="label">Policy Amt.</td>
-      <td class="value">{{ entry.policy_amt }}</td>
+      <td class="label">Dep. Email</td>
+      <td class="value">{{ entry.dep_email|default:"—" }}</td>
       <td class="label">Mobile Number</td>
       <td class="value">{{ entry.mobile_number }}</td>
     </tr>
     <tr>
+      <td class="label">Policy Amt.</td>
+      <td class="value">{{ entry.policy_amt }}</td>
       <td class="label">Premium Amt.</td>
       <td class="value">{{ entry.premium_amt }}</td>
+    </tr>
+    <tr>
       <td class="label">Phone Number</td>
       <td class="value">{{ entry.phone_number }}</td>
+      <td></td><td></td>
     </tr>
     <tr>
       <td class="label">Payment Term</td>
@@ -132,24 +137,60 @@
   </table>
 </div>
 
-<!-- Nominee Details -->
+{% if entry.is_la %}
+<div class="ib-card mt-3">
+  <div class="section-header">LA Details</div>
+  <table class="detail-table">
+    <tr>
+      <td class="label" style="width:16%">LA Name</td>
+      <td class="value" style="width:34%">{{ entry.la_name|default:"—" }}</td>
+      <td class="label" style="width:16%">LA Mother Name</td>
+      <td class="value" style="width:34%">{{ entry.la_mother_name|default:"—" }}</td>
+    </tr>
+    <tr>
+      <td class="label">Email ID</td>
+      <td class="value">{{ entry.la_email|default:"—" }}</td>
+      <td class="label">Phone Number</td>
+      <td class="value">{{ entry.la_phone_number|default:"—" }}</td>
+    </tr>
+    <tr>
+      <td class="label">Height and Weight</td>
+      <td class="value">{{ entry.la_height_weight|default:"—" }}</td>
+      <td class="label">Annual Income</td>
+      <td class="value">{{ entry.annual_income|default:"—" }}</td>
+    </tr>
+    <tr>
+      <td class="label">Job Details</td>
+      <td class="value">{{ entry.job_details|default:"—" }}</td>
+      <td class="label">Company Name</td>
+      <td class="value">{{ entry.company_name|default:"—" }}</td>
+    </tr>
+    <tr>
+      <td class="label">Designation</td>
+      <td class="value">{{ entry.designation|default:"—" }}</td>
+      <td></td><td></td>
+    </tr>
+  </table>
+</div>
+{% else %}
 <div class="ib-card mt-3">
   <div class="section-header">Nominee Details</div>
   <table class="detail-table">
     <tr>
       <td class="label" style="width:16%">Nominee Name</td>
-      <td class="value" style="width:34%">{{ entry.nominee_name }}</td>
+      <td class="value" style="width:34%">{{ entry.nominee_name|default:"—" }}</td>
       <td class="label" style="width:16%">Date of Birth</td>
-      <td class="value" style="width:34%">{{ entry.nominee_dob|date:"d/m/Y" }}</td>
+      <td class="value" style="width:34%">{{ entry.nominee_dob|date:"d/m/Y"|default:"—" }}</td>
     </tr>
     <tr>
       <td class="label">Mobile Number</td>
-      <td class="value">{{ entry.nominee_mobile }}</td>
+      <td class="value">{{ entry.nominee_mobile|default:"—" }}</td>
       <td class="label">Email ID</td>
       <td class="value">{{ entry.nominee_email|default:"—" }}</td>
     </tr>
   </table>
 </div>
+{% endif %}
 
 <div class="ib-card mt-3">
   <div class="section-header">Payment Details</div>

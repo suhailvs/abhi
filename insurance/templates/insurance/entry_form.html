@@ -10,6 +10,8 @@
   .error-summary { background: #fff3f3; border: 1px solid #f5c6cb; border-radius: 3px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.8rem; }
   .error-summary ul { margin: 4px 0 0 0; padding-left: 18px; }
   .error-summary li { color: #c00; }
+  .toggle-panel { display: none; }
+  .toggle-panel.is-visible { display: block; }
 </style>
 
 <div class="d-flex justify-content-between align-items-center mb-2">
@@ -228,6 +230,11 @@
               {{ form.pin }}
               {% for e in form.pin.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
             </div>
+            <div class="col-12 {% if form.dep_email.errors %}has-error{% endif %}">
+              <label class="form-label">Email ID</label>
+              {{ form.dep_email }}
+              {% for e in form.dep_email.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+            </div>
             <div class="col-6 {% if form.mobile_number.errors %}has-error{% endif %}">
               <label class="form-label">Mobile Number</label>
               {{ form.mobile_number }}
@@ -243,36 +250,6 @@
       </div>
     </div>
   </div>
-
-  <!-- ── NOMINEE DETAILS ── -->
-  <div class="ib-card mb-3">
-    <div class="form-section-title">Nominee Details</div>
-    <div class="p-2">
-      <div class="row g-2">
-        <div class="col-md-4 {% if form.nominee_name.errors %}has-error{% endif %}">
-          <label class="form-label">Nominee Name <span class="text-danger">*</span></label>
-          {{ form.nominee_name }}
-          {% for e in form.nominee_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
-        </div>
-        <div class="col-md-3 {% if form.nominee_dob.errors %}has-error{% endif %}">
-          <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
-          {{ form.nominee_dob }}
-          {% for e in form.nominee_dob.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
-        </div>
-        <div class="col-md-3 {% if form.nominee_mobile.errors %}has-error{% endif %}">
-          <label class="form-label">Mobile Number <span class="text-danger">*</span></label>
-          {{ form.nominee_mobile }}
-          {% for e in form.nominee_mobile.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
-        </div>
-        <div class="col-md-2 {% if form.nominee_email.errors %}has-error{% endif %}">
-          <label class="form-label">Email ID</label>
-          {{ form.nominee_email }}
-          {% for e in form.nominee_email.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="ib-card mb-3">
     <div class="form-section-title">Payment Details</div>
     <div class="p-2">
@@ -310,6 +287,99 @@
       </div>
     </div>
   </div>
+  <div class="ib-card mb-3">
+    <div class="form-section-title">Beneficiary Selection</div>
+    <div class="p-2">
+      <div class="form-check">
+        {{ form.is_la }}
+        <label class="form-check-label" for="id_is_la">IS LA</label>
+      </div>
+    </div>
+  </div>
+
+  <div id="la-details-panel" class="ib-card mb-3 toggle-panel">
+    <div class="form-section-title">LA Details</div>
+    <div class="p-2">
+      <div class="row g-2">
+        <div class="col-md-4 {% if form.la_name.errors %}has-error{% endif %}">
+          <label class="form-label">LA Name</label>
+          {{ form.la_name }}
+          {% for e in form.la_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-4 {% if form.la_mother_name.errors %}has-error{% endif %}">
+          <label class="form-label">LA Mother Name</label>
+          {{ form.la_mother_name }}
+          {% for e in form.la_mother_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-4 {% if form.la_email.errors %}has-error{% endif %}">
+          <label class="form-label">Email ID</label>
+          {{ form.la_email }}
+          {% for e in form.la_email.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-4 {% if form.la_phone_number.errors %}has-error{% endif %}">
+          <label class="form-label">Phone Number</label>
+          {{ form.la_phone_number }}
+          {% for e in form.la_phone_number.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-4 {% if form.la_height_weight.errors %}has-error{% endif %}">
+          <label class="form-label">Height and Weight</label>
+          {{ form.la_height_weight }}
+          {% for e in form.la_height_weight.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-4 {% if form.annual_income.errors %}has-error{% endif %}">
+          <label class="form-label">Annual Income</label>
+          {{ form.annual_income }}
+          {% for e in form.annual_income.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-4 {% if form.job_details.errors %}has-error{% endif %}">
+          <label class="form-label">Job Details</label>
+          {{ form.job_details }}
+          {% for e in form.job_details.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-4 {% if form.company_name.errors %}has-error{% endif %}">
+          <label class="form-label">Company Name</label>
+          {{ form.company_name }}
+          {% for e in form.company_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-4 {% if form.designation.errors %}has-error{% endif %}">
+          <label class="form-label">Designation</label>
+          {{ form.designation }}
+          {% for e in form.designation.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── NOMINEE DETAILS ── -->
+  <div id="nominee-details-panel" class="ib-card mb-3 toggle-panel">
+    <div class="form-section-title">Nominee Details</div>
+    <div class="p-2">
+      <div class="row g-2">
+        <div class="col-md-4 {% if form.nominee_name.errors %}has-error{% endif %}">
+          <label class="form-label">Nominee Name <span class="text-danger">*</span></label>
+          {{ form.nominee_name }}
+          {% for e in form.nominee_name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-3 {% if form.nominee_dob.errors %}has-error{% endif %}">
+          <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
+          {{ form.nominee_dob }}
+          {% for e in form.nominee_dob.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-3 {% if form.nominee_mobile.errors %}has-error{% endif %}">
+          <label class="form-label">Mobile Number <span class="text-danger">*</span></label>
+          {{ form.nominee_mobile }}
+          {% for e in form.nominee_mobile.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="col-md-2 {% if form.nominee_email.errors %}has-error{% endif %}">
+          <label class="form-label">Email ID</label>
+          {{ form.nominee_email }}
+          {% for e in form.nominee_email.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
 
   <!-- Submit -->
   <div class="d-flex gap-2">
@@ -322,6 +392,21 @@
   document.addEventListener('DOMContentLoaded', function () {
     const summary = document.querySelector('.error-summary');
     if (summary) summary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    const isLaCheckbox = document.getElementById('id_is_la');
+    const laPanel = document.getElementById('la-details-panel');
+    const nomineePanel = document.getElementById('nominee-details-panel');
+
+    function toggleBeneficiaryPanels() {
+      const showLa = Boolean(isLaCheckbox && isLaCheckbox.checked);
+      if (laPanel) laPanel.classList.toggle('is-visible', showLa);
+      if (nomineePanel) nomineePanel.classList.toggle('is-visible', !showLa);
+    }
+
+    if (isLaCheckbox) {
+      isLaCheckbox.addEventListener('change', toggleBeneficiaryPanels);
+      toggleBeneficiaryPanels();
+    }
   });
 </script>
 {% endblock %}

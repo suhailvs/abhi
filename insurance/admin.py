@@ -43,13 +43,20 @@ class InsuranceBrokingEntryAdmin(admin.ModelAdmin):
         ('Depositor Details', {
             'fields': (
                 'dep_name', 'address_line1', 'address_line2', 'address_line3',
-                'city', 'pin', 'mobile_number', 'phone_number',
+                'city', 'pin', 'dep_email', 'mobile_number', 'phone_number',
             ),
         }),
         ('Payment Details', {
             'fields': (
                 'bank', 'bank_branch', 'micr_code',
                 'ifsc_code', 'check_number', 'check_amount',
+            ),
+        }),
+        ('LA Details', {
+            'fields': (
+                'is_la', 'la_name', 'la_mother_name', 'la_email',
+                'la_phone_number', 'la_height_weight', 'annual_income',
+                'job_details', 'company_name', 'designation',
             ),
         }),
         ('Nominee Details', {

@@ -69,6 +69,7 @@ class InsuranceBrokingEntry(models.Model):
     address_line3 = models.CharField(max_length=200, blank=True, verbose_name="Address Line 3")
     city = models.CharField(max_length=100, verbose_name="City")
     pin = models.CharField(max_length=10, verbose_name="PIN Code")
+    dep_email = models.EmailField(max_length=200, blank=True, verbose_name="Depositor Email ID")
     mobile_number = models.CharField(max_length=15, blank=True, verbose_name="Mobile Number")
     phone_number = models.CharField(max_length=15, blank=True, verbose_name="Phone Number")
 
@@ -86,11 +87,29 @@ class InsuranceBrokingEntry(models.Model):
         verbose_name="Check Amount",
     )
 
+    # LA Details
+    is_la = models.BooleanField(default=False, verbose_name="Is LA")
+    la_name = models.CharField(max_length=100, blank=True, verbose_name="LA Name")
+    la_mother_name = models.CharField(max_length=100, blank=True, verbose_name="LA Mother Name")
+    la_email = models.EmailField(max_length=200, blank=True, verbose_name="LA Email ID")
+    la_phone_number = models.CharField(max_length=15, blank=True, verbose_name="LA Phone Number")
+    la_height_weight = models.CharField(max_length=100, blank=True, verbose_name="LA Height and Weight")
+    annual_income = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        verbose_name="Annual Income",
+    )
+    job_details = models.CharField(max_length=200, blank=True, verbose_name="Job Details")
+    company_name = models.CharField(max_length=200, blank=True, verbose_name="Company Name")
+    designation = models.CharField(max_length=100, blank=True, verbose_name="Designation")
+
     # Nominee Details
-    nominee_name = models.CharField(max_length=100, verbose_name="Nominee Name")
-    nominee_dob = models.DateField(verbose_name="Nominee Date of Birth")
+    nominee_name = models.CharField(max_length=100, blank=True, verbose_name="Nominee Name")
+    nominee_dob = models.DateField(null=True, blank=True, verbose_name="Nominee Date of Birth")
     nominee_email = models.EmailField(max_length=200, blank=True, verbose_name="Nominee Email ID")
-    nominee_mobile = models.CharField(max_length=15, verbose_name="Nominee Mobile Number")
+    nominee_mobile = models.CharField(max_length=15, blank=True, verbose_name="Nominee Mobile Number")
 
     # Meta
     company = models.CharField(max_length=200, default="ICICI PRUDENTIAL LIFE INSURANCE COMPANY LIMITED")

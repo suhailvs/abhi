@@ -57,6 +57,7 @@ class InsuranceBrokingEntryForm(forms.ModelForm):
             'address_line3': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Taluk / Area'}),
             'city': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City / District'}),
             'pin': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '6-digit PIN'}),
+            'dep_email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'depositor@email.com'}),
             'mobile_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mobile No.'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone No.'}),
 
@@ -67,6 +68,18 @@ class InsuranceBrokingEntryForm(forms.ModelForm):
             'ifsc_code': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'IFSC code'}),
             'check_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Cheque / check number'}),
             'check_amount': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '0.00'}),
+
+            # LA Details
+            'is_la': forms.CheckboxInput(attrs={'class': 'form-check-input', 'id': 'id_is_la'}),
+            'la_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'LA full name'}),
+            'la_mother_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Mother name'}),
+            'la_email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'la@email.com'}),
+            'la_phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone number'}),
+            'la_height_weight': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g. 170 cm / 68 kg'}),
+            'annual_income': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': '0.00'}),
+            'job_details': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Job details'}),
+            'company_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Company name'}),
+            'designation': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Designation'}),
 
             # Nominee Details
             'nominee_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nominee Full Name'}),
@@ -97,3 +110,39 @@ class InsuranceBrokingEntryForm(forms.ModelForm):
         if mob and (not mob.isdigit() or len(mob) < 10):
             raise forms.ValidationError("Enter a valid mobile number (min 10 digits).")
         return mob
+
+    def clean_la_phone_number(self):
+        phone = self.cleaned_data.get('la_phone_number', '')
+        if phone and (not phone.isdigit() or len(phone) < 10):
+            raise forms.ValidationError("Enter a valid phone number (min 10 digits).")
+        return phone
+
+    def clean(self):
+        cleaned_data = super().clean()
+        is_la = cleaned_data.get('is_la')
+
+        if is_la:
+            required_la_fields = {
+                'la_name': "LA name is required when 'Is LA' is checked.",
+                'la_mother_name': "LA mother name is required when 'Is LA' is checked.",
+                'la_phone_number': "LA phone number is required when 'Is LA' is checked.",
+                'la_height_weight': "Height and weight are required when 'Is LA' is checked.",
+                'annual_income': "Annual income is required when 'Is LA' is checked.",
+                'job_details': "Job details are required when 'Is LA' is checked.",
+                'company_name': "Company name is required when 'Is LA' is checked.",
+                'designation': "Designation is required when 'Is LA' is checked.",
+            }
+            for field_name, message in required_la_fields.items():
+                if not cleaned_data.get(field_name):
+                    self.add_error(field_name, message)
+        else:
+            required_nominee_fields = {
+                'nominee_name': "Nominee name is required.",
+                'nominee_dob': "Nominee date of birth is required.",
+                'nominee_mobile': "Nominee mobile number is required.",
+            }
+            for field_name, message in required_nominee_fields.items():
+                if not cleaned_data.get(field_name):
+                    self.add_error(field_name, message)
+
+        return cleaned_data
